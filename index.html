@@ -1,49 +1,648 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Serena Khan</title>
-    <link rel="icon" type="image/svg+xml" href="assets/img/urku-ico.svg">
-    <link rel="stylesheet" href="assets/css/aurora-pack.min.css">
-    <link rel="stylesheet" href="assets/css/aurora-theme-base.min.css">
-    <link rel="stylesheet" href="assets/css/urku.css">
-  </head>
-  <body class="top-fixed">
-    <header class="ae-container-fluid ae-container-fluid--full rk-header ">
-      <input type="checkbox" id="mobile-menu" class="rk-mobile-menu">
-      <label for="mobile-menu">
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-        <svg>
-          <use xlink:href="assets/img/symbols.svg#bar"></use>
-        </svg>
-      </label>
-      <div class="ae-container-fluid rk-topbar">
-        <h1 class="rk-logo"><a href="index.html">urku portfolio<sup>tm</sup></a></h1>
-        <nav class="rk-navigation">
-          <ul class="rk-menu">
-          <li class="active rk-menu__item"><a href="index.html" class="rk-menu__link">Home</a>
-          </li>
-          <li class="rk-menu__item"><a href="portfolio.html" class="rk-menu__link">Portfolio</a>
-          <nav class="rk-menu__sub">
-          <ul class="rk-container">
-          <li class="rk-menu__item"><a href="portfolio.html" class="rk-menu__link">EPK</a></li>
-          <li class="rk-menu__item"><a href="portfolio-alt.html" class="rk-menu__link">Contact</a></li>
-                 
-          <li class="rk-menu__item"><a href="#0" class="rk-menu__link">Pages</a>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta charset="UTF-8">
+  <title>Serena Khan | Modern Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23222'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='%23fff' font-family='Century Gothic, sans-serif'%3ESK%3C/text%3E%3C/svg%3E">
+  <!-- No external CSS dependencies to ensure clean bullet styling and font control -->
+  <style>
+    /* RESET & BASE — Century Gothic everywhere */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', 'Futura', 'Tw Cen MT', sans-serif;
+      background-color: #faf9f8;
+      color: #1e1e1e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Typography - reinforce Century Gothic */
+    h1, h2, h3, h4, p, li, a, button, label, .rk-logo, .rk-menu__link, .rk-menu__item, 
+    .rk-topbar, .rk-navigation, .bullet-list, .rk-container, .rk-header, .hero-text {
+      font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', 'Futura', sans-serif;
+    }
+
+    /* Layout containers — fluid & clean */
+    .ae-container-fluid {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .ae-container-fluid--full {
+      max-width: 100%;
+      padding: 0;
+    }
+
+    /* header styling */
+    .rk-header {
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+      position: relative;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .rk-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .rk-logo a {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+      color: #111;
+      text-transform: uppercase;
+      background: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .rk-logo a:hover {
+      opacity: 0.7;
+    }
+
+    /* mobile menu toggle */
+    .rk-mobile-menu {
+      display: none;
+    }
+
+    label[for="mobile-menu"] {
+      display: none;
+      cursor: pointer;
+    }
+
+    label[for="mobile-menu"] svg {
+      width: 28px;
+      height: 28px;
+      fill: #222;
+      margin: 4px 0;
+    }
+
+    /* navigation */
+    .rk-navigation {
+      display: flex;
+      align-items: center;
+    }
+
+    .rk-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rk-menu__item {
+      position: relative;
+      list-style: none;
+    }
+
+    .rk-menu__link {
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c2c2c;
+      padding: 0.5rem 0;
+      letter-spacing: 0.3px;
+      transition: color 0.2s ease;
+      display: inline-block;
+    }
+
+    .rk-menu__link:hover {
+      color: #a07e5c;
+    }
+
+    .active .rk-menu__link {
+      color: #a07e5c;
+      border-bottom: 2px solid #a07e5c;
+    }
+
+    /* submenu styling (simple dropdown) */
+    .rk-menu__sub {
+      position: absolute;
+      top: 2rem;
+      left: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      z-index: 200;
+      min-width: 180px;
+      border: 1px solid #efefef;
+    }
+
+    .rk-menu__item:hover > .rk-menu__sub {
+      opacity: 1;
+      visibility: visible;
+      top: 2.2rem;
+    }
+
+    .rk-container {
+      list-style: none;
+      padding: 0.6rem 0;
+      margin: 0;
+    }
+
+    .rk-container .rk-menu__item {
+      padding: 0.3rem 1.2rem;
+    }
+
+    .rk-container .rk-menu__link {
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: block;
+      padding: 0.4rem 0;
+    }
+
+    /* nested submenu for "Pages" */
+    .rk-menu__sub .rk-menu__sub {
+      left: 100%;
+      top: 0;
+    }
+
+    /* Hero section */
+    .hero {
+      background: #ffffff;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+      color: #1f1f1f;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #5a5a5a;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* main content */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      letter-spacing: -0.2px;
+      border-left: 5px solid #a07e5c;
+      padding-left: 1rem;
+    }
+
+    /* BULLET POINTS — neatly aligned, century gothic, consistent spacing */
+    .neat-bullets {
+      list-style: none;
+      margin: 1.5rem 0 1rem 0;
+      padding: 0;
+    }
+
+    .neat-bullets li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 0.85rem;
+      font-size: 1.05rem;
+      line-height: 1.45;
+      color: #2e2e2e;
+    }
+
+    /* custom bullet: elegant centered dot */
+    .neat-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #a07e5c;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    /* alternative style for secondary lists */
+    .neat-bullets.alt-bullets li::before {
+      content: "—";
+      font-size: 1.2rem;
+      top: -1px;
+    }
+
+    /* grid for two-column bullet layout (optional alignment) */
+    .two-col-bullets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.2rem 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .two-col-bullets .neat-bullets {
+      margin: 0;
+    }
+
+    /* card / portfolio style section */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .portfolio-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: transform 0.25s ease, box-shadow 0.2s;
+      border: 1px solid #ececec;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-img {
+      background: #f3f0ea;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #8b6b4d;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-content h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-content p {
+      color: #5e5e5e;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* EPK contact section */
+    .epk-section {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ececec;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-details {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .contact-details h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .simple-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .simple-list li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .simple-list li strong {
+      min-width: 85px;
+      font-weight: 600;
+      color: #1f1f1f;
+    }
+
+    .simple-list li span {
+      color: #4b4b4b;
+    }
+
+    /* about section bullet alignment example */
+    .about-bullet-group {
+      background: #fefcf9;
+      padding: 1.5rem 2rem;
+      border-radius: 24px;
+      margin: 1.5rem 0;
+    }
+
+    hr {
+      margin: 2rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #e0e0e0, #c0a080, #e0e0e0);
+    }
+
+    footer {
+      background: #f5f3ef;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #5f5f5f;
+      border-top: 1px solid #e9e5e0;
+    }
+
+    @media (max-width: 800px) {
+      .rk-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .rk-menu {
+        flex-wrap: wrap;
+        gap: 1.2rem;
+      }
+      .rk-navigation {
+        width: 100%;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .two-col-bullets {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      label[for="mobile-menu"] {
+        display: block;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.2rem;
+      }
+      .rk-navigation {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        width: 100%;
+      }
+      .rk-mobile-menu:checked ~ .rk-topbar .rk-navigation {
+        max-height: 450px;
+      }
+      .rk-menu {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 1rem 0 1.2rem;
+      }
+      .rk-menu__sub {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        padding-left: 1rem;
+        border-left: 2px solid #ddd;
+        margin-top: 0.5rem;
+        background: transparent;
+      }
+      .rk-menu__item:hover > .rk-menu__sub {
+        top: 0;
+      }
+      .rk-container .rk-menu__item {
+        padding-left: 0;
+      }
+      .rk-menu__sub .rk-menu__sub {
+        left: 0;
+        margin-left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="top-fixed">
+  <header class="ae-container-fluid ae-container-fluid--full rk-header">
+    <input type="checkbox" id="mobile-menu" class="rk-mobile-menu">
+    <label for="mobile-menu">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="ae-container-fluid rk-topbar">
+      <h1 class="rk-logo"><a href="index.html">Serena Khan<span style="font-size:0.9rem; vertical-align:super;">®</span></a></h1>
+      <nav class="rk-navigation">
+        <ul class="rk-menu">
+          <li class="active rk-menu__item"><a href="index.html" class="rk-menu__link">Home</a></li>
+          <li class="rk-menu__item"><a href="#portfolio" class="rk-menu__link">Portfolio</a>
             <nav class="rk-menu__sub">
               <ul class="rk-container">
-              <li class="rk-menu__item"><a href="about.html" class="rk-menu__link">About</a></li>
-        
-            </li>
+                <li class="rk-menu__item"><a href="#epk" class="rk-menu__link">EPK</a></li>
+                <li class="rk-menu__item"><a href="#contact" class="rk-menu__link">Contact</a></li>
+              </ul>
+            </nav>
+          </li>
+          <li class="rk-menu__item"><a href="#pages" class="rk-menu__link">Pages</a>
+            <nav class="rk-menu__sub">
+              <ul class="rk-container">
+                <li class="rk-menu__item"><a href="#about" class="rk-menu__link">About</a></li>
+              </ul>
+            </nav>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h2>Serena Khan</h2>
+        <p>Creative Director & Visual Storyteller — crafting bold narratives through design, film, and digital art.</p>
+      </div>
+    </section>
+
+    <div class="main-content">
+      <!-- BULLET POINTS SECTION: neatly aligned with custom before pseudo -->
+      <div id="about">
+        <h3 class="section-title">Curatorial approach & philosophy</h3>
+        <div class="about-bullet-group">
+          <ul class="neat-bullets">
+            <li>Human‑centered design with emotional resonance — each project begins with empathy and cultural context.</li>
+            <li>Interdisciplinary practice blending photography, motion design, and interactive installations.</li>
+            <li>Award‑winning campaigns featured in Communication Arts, It’s Nice That, and AIGI.</li>
+            <li>Mentor at RCA & guest lecturer for global design forums.</li>
           </ul>
-  
+        </div>
+      </div>
 
+      <!-- two column bullets - even more alignment example -->
+      <h3 class="section-title">Core competencies</h3>
+      <div class="two-col-bullets">
+        <ul class="neat-bullets">
+          <li>Art direction & brand strategy</li>
+          <li>UX/UI for immersive media</li>
+          <li>Editorial & publication design</li>
+        </ul>
+        <ul class="neat-bullets alt-bullets">
+          <li>3D visualization & CGI</li>
+          <li>Creative coding (p5.js, TouchDesigner)</li>
+          <li>Curatorial research & exhibition design</li>
+        </ul>
+      </div>
 
+      <!-- Portfolio section (EPK and work) -->
+      <div id="portfolio">
+        <h3 class="section-title">Selected projects — EPK highlights</h3>
+        <div class="card-grid">
+          <div class="portfolio-card">
+            <div class="card-img">🎬</div>
+            <div class="card-content">
+              <h3>“Fragments of Silence”</h3>
+              <p>Short film / EPK feature — official selection at SXSW 2025. Exploration of memory and architecture.</p>
+              <ul class="neat-bullets" style="margin-top: 0.5rem;">
+                <li>Direction & cinematography</li>
+                <li>Sound design collaboration</li>
+              </ul>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="card-img">🎨</div>
+            <div class="card-content">
+              <h3>Chroma Bodies</h3>
+              <p>Interactive installation & EPK publication. Awarded “Best Digital Experience” at Milan Design Week.</p>
+              <ul class="neat-bullets" style="margin-top: 0.5rem;">
+                <li>Generative visuals & sensors</li>
+                <li>Curatorial essay included</li>
+              </ul>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="card-img">📘</div>
+            <div class="card-content">
+              <h3>Narrative Atlas</h3>
+              <p>Brand identity & book design for emerging writers collective. Typography-led system.</p>
+              <ul class="neat-bullets" style="margin-top: 0.5rem;">
+                <li>Art direction & illustration</li>
+                <li>Print production management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                
+      <!-- EPK detailed section (Electronic Press Kit) -->
+      <div id="epk">
+        <div class="epk-section">
+          <h3 style="font-size: 1.8rem; font-weight: 600;">Electronic Press Kit (EPK)</h3>
+          <p style="margin: 0.5rem 0 1rem; color:#4b4b4b;">Serena Khan — comprehensive media resources, biography, and notable achievements.</p>
+          <ul class="neat-bullets" style="margin: 1rem 0 1.8rem;">
+            <li>Full bio & artist statement (PDF & web version)</li>
+            <li>High-res press photography + campaign stills library</li>
+            <li>Selected interviews: “The Design Frontier” podcast, It’s Nice That studio tour</li>
+            <li>Technical rider & collaboration guidelines for exhibitions</li>
+            <li>Recent accolades: GDUSA ‘Artist to Watch’, Young Guns 23 finalist</li>
+          </ul>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <span style="background:#f0ede8; padding:0.4rem 1rem; border-radius:40px; font-size:0.85rem;">📄 Download EPK (PDF)</span>
+            <span style="background:#f0ede8; padding:0.4rem 1rem; border-radius:40px; font-size:0.85rem;">🎥 Showreel 2025</span>
+            <span style="background:#f0ede8; padding:0.4rem 1rem; border-radius:40px; font-size:0.85rem;">📸 Press assets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact section (consistent with bullet alignment) -->
+      <div id="contact">
+        <h3 class="section-title">Contact & representation</h3>
+        <div class="contact-info">
+          <div class="contact-details">
+            <h4>Studio / Management</h4>
+            <ul class="simple-list">
+              <li><strong>Email:</strong> <span>hello@serenakhan.com</span></li>
+              <li><strong>Phone:</strong> <span>+1 (212) 555 0973</span></li>
+              <li><strong>Location:</strong> <span>Brooklyn, NY / London, UK</span></li>
+            </ul>
+          </div>
+          <div class="contact-details">
+            <h4>Press & Inquiries</h4>
+            <ul class="simple-list">
+              <li><strong>PR:</strong> <span>press@serenakhan.com</span></li>
+              <li><strong>Instagram:</strong> <span>@serena.khan.studio</span></li>
+              <li><strong>LinkedIn:</strong> <span>/in/serenakhan</span></li>
+            </ul>
+          </div>
+          <div class="contact-details">
+            <h4>Collaboration interests</h4>
+            <ul class="neat-bullets" style="margin-top:0;">
+              <li>Gallery exhibitions & residencies</li>
+              <li>Brand creative direction</li>
+              <li>Public speaking & workshops</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- additional neatly aligned bullet showcase: achievements -->
+      <hr>
+      <div style="background:#ffffff; border-radius: 28px; padding: 1.5rem 2rem; margin: 1rem 0 2rem;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Honors & features</h3>
+        <div class="two-col-bullets">
+          <ul class="neat-bullets">
+            <li>ADC Annual Awards — Silver Cube (2024)</li>
+            <li>Type Directors Club Certificate of Excellence</li>
+            <li>D&AD Next Illustrator Pencil</li>
+          </ul>
+          <ul class="neat-bullets alt-bullets">
+            <li>Forbes 30 Under 30 (Art & Style)</li>
+            <li>International Biennale of Design — shortlist</li>
+            <li>Editorial feature: “New Visionaries”, Wallpaper*</li>
+          </ul>
+        </div>
+        <p style="margin-top: 1rem; font-size:0.9rem; color:#6f6f6f;">* Full CV and list of exhibitions available upon request.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Serena Khan Studio — all works © respective owners. Crafted with Century Gothic & attention to alignment.</p>
+    <p style="margin-top: 0.5rem;">📍 Brooklyn / London  —  follow for new visual narratives</p>
+  </footer>
+</body>
+</html>
